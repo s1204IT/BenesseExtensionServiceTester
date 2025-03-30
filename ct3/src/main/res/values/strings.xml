@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BEService Tester (CT3)</string>
+    <string name="activity_name">BEService Tester</string>
+    <string name="about">About BenesseExtension</string>
+    <string name="shortcut_label">詳細</string>
+    <string-array name="get_string">
+        <item>bc:mac_address</item>
+    </string-array>
+</resources>

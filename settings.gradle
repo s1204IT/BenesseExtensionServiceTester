@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    plugins {
+        id 'com.android.application' version '8.9.1' apply false
+        id 'com.android.library' version '8.9.1' apply false
+    }
+}
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = 'https://jitpack.io' }
+    }
+}
+
+rootProject.name = 'BenesseExtensionService Tester'
+include 'ct3', 'ctz', 'hidden-api'

@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace = 'me.s1204.benesse.touch.test.service.ct3'
+    compileSdk = 35
+
+    defaultConfig {
+        minSdk = 24
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0.0"
+        proguardFiles += 'proguard-rules.pro'
+        multiDexEnabled = false
+    }
+
+    signingConfigs {
+        android {
+            storeFile rootProject.file('gradle/android.jks')
+            storePassword 'android'
+            keyAlias 'android'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        configureEach {
+            signingConfig = signingConfigs.android
+        }
+        release {
+            minifyEnabled = true
+            shrinkResources = true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+
+    lintOptions {
+        ignore 'Deprecated', 'DiscouragedApi', 'ProtectedPermissions', 'HardcodedText'
+    }
+}
+
+dependencies {
+    compileOnly 'com.github.s1204IT:BenesseExtension:1.0.0'
+    compileOnly 'com.github.s1204IT:BenesseExtensionService-CT3:1.0.0'
+    compileOnly project(':hidden-api')
+}

@@ -1,0 +1,163 @@
+package me.s1204.benesse.touch.test.service.ctz;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.IBenesseExtensionService;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.provider.Settings;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.Arrays;
+
+public class Tester extends Activity implements View.OnClickListener {
+
+    static IBenesseExtensionService mBenesseExtensionService;
+
+    private void makeText(String msg) {
+        runOnUiThread(() -> Toast.makeText(this, msg, Toast.LENGTH_SHORT).show());
+    }
+
+    private void setOnClickListener(int resId) {
+        findViewById(resId).setOnClickListener(this);
+    }
+
+    private void changeLayout(int layout, int btnId) {
+        setContentView(layout);
+        findViewById(btnId).setOnClickListener(this);
+        findViewById(R.id.backHome).setOnClickListener(this);
+    }
+
+    private String getBoxText(int resId) {
+        return ((EditText) findViewById(resId)).getText().toString();
+    }
+
+    private String getPullText(int resId) {
+        return ((Spinner) findViewById(resId)).getSelectedItem().toString();
+    }
+
+    private static final int[] FUNC_LIST = {
+            R.id.btn_checkPassword,
+            R.id.btn_getDchaState,
+            R.id.btn_getInt,
+            R.id.btn_getString,
+            R.id.btn_putInt,
+            R.id.btn_putString,
+            R.id.btn_setDchaState
+    };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            mBenesseExtensionService = IBenesseExtensionService.Stub.asInterface(ServiceManager.getService("benesse_extension"));
+        } catch (RuntimeException ignored) {
+        }
+        setContentView(R.layout.layout);
+        for (int resId: FUNC_LIST) setOnClickListener(resId);
+    }
+
+    @Override
+    public void onClick(final View v) {
+        final int resId = v.getId();
+        try {
+            if (resId == R.id.backHome) {
+                //noinspection deprecation
+                onBackPressed();
+            } else if (resId == R.id.btn_checkPassword) {
+                changeLayout(R.layout.layout_checkpassword, R.id.exec_checkPassword);
+            } else if (resId == R.id.exec_checkPassword) {
+                String passwordText = getBoxText(R.id.passwordText);
+                makeText("checkPassword：" + mBenesseExtensionService.checkPassword(passwordText));
+            } else if (resId == R.id.btn_getDchaState) {
+                makeText("getDchaState：" + mBenesseExtensionService.getDchaState());
+            } else if (resId == R.id.btn_getInt) {
+                changeLayout(R.layout.layout_getint, R.id.exec_getInt);
+            } else if (resId == R.id.exec_getInt) {
+                String name = getPullText(R.id.name_getInt);
+                makeText(name.isEmpty() ? "値を入力してください" : "getInt：" + mBenesseExtensionService.getInt(name));
+            } else if (resId == R.id.btn_getString) {
+                changeLayout(R.layout.layout_getstring, R.id.exec_getString);
+            } else if (resId == R.id.exec_getString) {
+                String name = getPullText(R.id.name_getString);
+                makeText(name.isEmpty() ? "値を入力してください" : "getString：" + mBenesseExtensionService.getString(name));
+            } else if (resId == R.id.btn_putInt) {
+                changeLayout(R.layout.layout_putint, R.id.exec_putInt);
+            } else if (resId == R.id.exec_putInt) {
+                String name = getPullText(R.id.name_putInt);
+                String value = getBoxText(R.id.value_putInt);
+                makeText(value.isEmpty() ? "値を入力してください" : "putInt：" + mBenesseExtensionService.putInt(name, Integer.parseInt(value)));
+            } else if (resId == R.id.btn_putString) {
+                changeLayout(R.layout.layout_putstring, R.id.exec_putString);
+            } else if (resId == R.id.exec_putString) {
+                String name = getPullText(R.id.name_putString);
+                String value = getBoxText(R.id.value_putString);
+                makeText(value.isEmpty() ? "値を入力してください" : "putString：" + mBenesseExtensionService.putString(name, value));
+            } else if (resId == R.id.btn_setDchaState) {
+                changeLayout(R.layout.layout_setdchastate, R.id.setDchaState_0);
+                Arrays.asList(R.id.setDchaState_1, R.id.setDchaState_2, R.id.setDchaState_3)
+                        .forEach(this::setOnClickListener);
+            } else if (resId == R.id.setDchaState_0) {
+                mBenesseExtensionService.setDchaState(0);
+            } else if (resId == R.id.setDchaState_1) {
+                mBenesseExtensionService.setDchaState(1);
+            } else if (resId == R.id.setDchaState_2) {
+                mBenesseExtensionService.setDchaState(2);
+            } else if (resId == R.id.setDchaState_3) {
+                mBenesseExtensionService.setDchaState(3);
+            }
+        } catch (RemoteException ignored) {
+            makeText("Remote Exception.");
+        } catch (NoClassDefFoundError ignored) {
+            makeText("BenesseExtension が存在しません");
+            finish();
+        } catch (NoSuchMethodError ignored) {
+            makeText("関数が存在しません");
+        } catch (SecurityException ignored) {
+            makeText("関数の実行に失敗しました");
+        }
+    }
+
+    /** @noinspection DeprecatedIsStillUsed*/
+    @Override
+    @Deprecated
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        startActivity(new Intent(Intent.ACTION_MAIN)
+                .addCategory(Intent.CATEGORY_DEFAULT)
+                .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                .setPackage(getPackageName()));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    /** @noinspection NullableProblems*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_about) {
+            setContentView(R.layout.about);
+            return true;
+        } else if (itemId == R.id.menu_settings) {
+            startActivity(new Intent(Settings.ACTION_SETTINGS));
+            return true;
+        } else if (itemId == R.id.menu_devopts) {
+            startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

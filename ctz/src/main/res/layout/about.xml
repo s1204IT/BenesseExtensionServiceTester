@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- checkPassword -->
+        <TextView
+            android:id="@+id/about_checkPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="boolean checkPassword(String passwordText)"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_checkPassword_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="予め指定されているパスワードと一致するか確認する関数。\n/factory/dcha_hash が存在する場合、そちらがパスワードの比較対象として優先される。\n一致した場合は true を返し、再起動時に ADB が自動で無効になるフラグを無効にできる。\n尚、このフラグは putInt や、ADB から直接設定可能。"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- getDchaState -->
+        <TextView
+            android:id="@+id/about_getDchaState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="void getDchaState()"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_getDchaState_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="System ネームスペースの dcha_state の値を返す。"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- getInt -->
+        <TextView
+            android:id="@+id/about_getInt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="int getInt(String name)"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_getInt_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="特定変数の値を返す。\n・bc:compatscreen：画面サイズを変更\n　　・0：[1920, 1200]\n　　・1：[1024, 768]\n　　・2：[1280, 800]\n・bc:nightmode:active：読書灯の有効状態 \n　　・0 ：無効\n　　・1：有効\n・bc:nightcolor:max：読書灯の最大の輝度\n・bc:nightcolor:min：読書灯の最低の輝度\n・bc:nightcolor:current：読書灯の現在の輝度\n・bc_password_hit：端末起動時に ADB を自動で無効化するかどうか\n　　・1 以外：無効化\n　　・1：現在の状態を維持\n・bc:pen:battery：Next のペンの電池残量\n・bc:touchpanel:palmreject:size"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- getString -->
+        <TextView
+            android:id="@+id/about_getUserCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="String getString(String name)"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_getString_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="特定変数の値を返す。\n・bc:mac_address：Wi-Fi の MAC アドレス\n・bc:serial_no：製造番号\n・bc:touchpanel:fw_version\n・bc:digitizer:fw_version\n・bc:touchpanel:nvt:fw_version\n・bc:touchpanel:fts:fw_version\n・bc:touchpanel:lcd_type"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- putInt -->
+        <TextView
+            android:id="@+id/about_putInt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="boolean putInt(String name, int value)"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_putInt_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="特定変数の値の設定または処理を実行。\n・bc:compatscreen\n・bc:nightmode:active\n・bc:nightcolor:current\n・bc_password_hit\n・bc:touchpanel:palmreject:size"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- putString -->
+        <TextView
+            android:id="@+id/about_putString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="boolean putString(String name, String value)"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_putString_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="タッチパネルファームウェアアップデートに使用。\n２つ目の引数にファイルを指定。\n・bc:touchpanel:fw_update\n・bc:digitizer:fw_update\n・bc:touchpanel:nvt:fw_update\n・bc:touchpanel:fts:fw_update：※処理が実装されていない"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- setDchaState -->
+        <TextView
+            android:id="@+id/about_setDchaState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:text="void setDchaState(int status)"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_setDchaState_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="System ネームスペースの dcha_state の値を設定。"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@android:color/darker_gray" />
+
+    </LinearLayout>
+</ScrollView>
