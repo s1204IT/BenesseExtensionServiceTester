@@ -45,6 +45,6 @@ android {
 }
 
 dependencies {
-    compileOnly 'com.github.s1204IT:BenesseExtensionService-CTZ:1.0.1'
+    compileOnly 'me.s1204:BenesseExtensionService-CTZ:1.0.0'
     compileOnly project(':hidden-api')
 }
